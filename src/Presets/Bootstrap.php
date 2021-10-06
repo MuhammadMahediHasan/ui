@@ -44,7 +44,7 @@ class Bootstrap extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/bootstrap-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__ . '/bootstrap-stubs/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
@@ -56,8 +56,8 @@ class Bootstrap extends Preset
     {
         (new Filesystem)->ensureDirectoryExists(resource_path('sass'));
 
-        copy(__DIR__.'/bootstrap-stubs/_variables.scss', resource_path('sass/_variables.scss'));
-        copy(__DIR__.'/bootstrap-stubs/app.scss', resource_path('sass/app.scss'));
+        copy(__DIR__ . '/bootstrap-stubs/_variables.scss', resource_path('sass/_variables.scss'));
+        copy(__DIR__ . '/bootstrap-stubs/app.scss', resource_path('sass/app.scss'));
     }
 
     /**
@@ -67,6 +67,6 @@ class Bootstrap extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/bootstrap-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__ . '/bootstrap-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
 }

@@ -98,7 +98,7 @@ class AuthCommand extends Command
             }
 
             copy(
-                __DIR__.'/Auth/'.$this->argument('type').'-stubs/'.$key,
+                __DIR__ . '/Auth/' .$this->argument('type').'-stubs/'.$key,
                 $view
             );
         }
@@ -125,12 +125,12 @@ class AuthCommand extends Command
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
+            file_get_contents(__DIR__ . '/Auth/stubs/routes.stub'),
             FILE_APPEND
         );
 
         copy(
-            __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
+            __DIR__ . '/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
             base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
         );
     }
@@ -145,7 +145,7 @@ class AuthCommand extends Command
         return str_replace(
             '{{namespace}}',
             $this->laravel->getNamespace(),
-            file_get_contents(__DIR__.'/Auth/stubs/controllers/HomeController.stub')
+            file_get_contents(__DIR__ . '/Auth/stubs/controllers/HomeController.stub')
         );
     }
 
