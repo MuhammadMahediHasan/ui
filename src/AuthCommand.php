@@ -12,7 +12,7 @@ class AuthCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ui:auth
+    protected $signature = 'demo-ui:auth
                     { type=bootstrap : The preset type (bootstrap) }
                     {--views : Only scaffold the authentication views}
                     {--force : Overwrite existing views by default}';
@@ -40,6 +40,20 @@ class AuthCommand extends Command
         'layouts/app.stub' => 'layouts/app.blade.php',
     ];
 
+    public $style_assets = [
+        'assets/css/style.css' => 'assets/css/style.css',
+        'assets/css/overlay.css' => 'assets/css/overlay.css',
+    ];
+
+    public $script_assets = [
+        'assets/js/charts.js' => 'assets/js/charts.js',
+        'assets/js/colors.js' => 'assets/js/colors.js',
+        'assets/js/main.js' => 'assets/js/main.js',
+        'assets/js/popovers.js' => 'assets/js/popovers.js',
+        'assets/js/tooltips.js' => 'assets/js/tooltips.js',
+        'assets/js/widgets.js' => 'assets/js/widgets.js',
+    ];
+
     /**
      * Execute the console command.
      *
@@ -59,6 +73,7 @@ class AuthCommand extends Command
 
         $this->ensureDirectoriesExist();
         $this->exportViews();
+        $this->exportCss();
 
         if (! $this->option('views')) {
             $this->exportBackend();
@@ -98,7 +113,28 @@ class AuthCommand extends Command
             }
 
             copy(
-                __DIR__ . '/Auth/' .$this->argument('type').'-stubs/'.$key,
+                __DIR__.'/Auth/'.$this->argument('type').'-stubs/'.$key,
+                $view
+            );
+        }
+    }
+
+    /**
+     * Export the layout css.
+     *
+     * @return void
+     */
+    protected function exportCss()
+    {
+        foreach ($this->style_assets as $key => $value) {
+            if (file_exists($view = public_path($value)) && ! $this->option('force')) {
+                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
+                    continue;
+                }
+            }
+
+            copy(
+                __DIR__.'/Auth/bootstrap-stubs/'.$key,
                 $view
             );
         }
@@ -125,12 +161,12 @@ class AuthCommand extends Command
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(__DIR__ . '/Auth/stubs/routes.stub'),
+            file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
             FILE_APPEND
         );
 
         copy(
-            __DIR__ . '/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
+            __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
             base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
         );
     }
@@ -145,7 +181,7 @@ class AuthCommand extends Command
         return str_replace(
             '{{namespace}}',
             $this->laravel->getNamespace(),
-            file_get_contents(__DIR__ . '/Auth/stubs/controllers/HomeController.stub')
+            file_get_contents(__DIR__.'/Auth/stubs/controllers/HomeController.stub')
         );
     }
 
@@ -155,7 +191,7 @@ class AuthCommand extends Command
      * @param  string  $path
      * @return string
      */
-    protected function getViewPath($path)
+    protected function getViewPath($path): string
     {
         return implode(DIRECTORY_SEPARATOR, [
             config('view.paths')[0] ?? resource_path('views'), $path,
