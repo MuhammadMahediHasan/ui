@@ -1,0 +1,19 @@
+<!-- CoreUI and necessary plugins-->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/pace.min.js') }}"></script>
+<script src="{{ asset('assets/js/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/coreui.min.js') }}"></script>
+<script src="{{ asset('assets/js/Pnotify.js') }}"></script>
+<script src="{{ asset('assets/js/PnotifyButtons.js') }}"></script>
+<script src="{{ asset('assets/js/PnotifyConfirm.js') }}"></script>
+<script src="{{ asset('assets/js/PnotifyMobile.js') }}"></script>
+<script src="{{ asset('assets/js/PnotifyNonBlock.js') }}"></script>
+<script>
+    PNotify.defaults.styling = 'bootstrap4';
+</script>
+<!-- Plugins and scripts required by this view-->
+<script src="{{ asset('assets/js/Chart.min.js') }}"></script>
+<script src="{{ asset('assets/js/custom-tooltips.min.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
